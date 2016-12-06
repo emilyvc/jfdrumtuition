@@ -1,4 +1,8 @@
+.icon--logo-header { background-image: url('png/logo-header.png'); background-repeat: no-repeat; }
+
 .icon--logo-mixd { background-image: url('png/logo-mixd.png'); background-repeat: no-repeat; }
+
+.icon--logo { background-image: url('png/logo.png'); background-repeat: no-repeat; }
 
 .icon--menu-close { background-image: url('png/menu-close.png'); background-repeat: no-repeat; }
 

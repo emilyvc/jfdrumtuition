@@ -1,0 +1,157 @@
+/**
+ * Title:
+ *    Navigation
+ * Description:
+ *    The .nav module and its extensions
+ * Sections:
+ *    $. Variables
+ *    $. Container
+ *    $. Component
+ *    $. Primary
+ *    $. Secondary
+ *    $. Tertiary
+ */
+
+
+
+/* $. Variables
+\*----------------------------------------------------------------*/
+
+$color-nav: $color-link;
+
+
+
+/* $. Container
+\*----------------------------------------------------------------*/
+
+.nav-container {
+    padding: $base;
+}
+
+
+
+/* $. Component
+\*----------------------------------------------------------------*/
+
+.nav {
+    @extend %cf;
+    @extend %list--unset;
+}
+
+.nav__item {
+}
+
+.nav__link {
+}
+
+
+
+/* $. Primary
+\*----------------------------------------------------------------*/
+
+.nav--primary {
+
+    text-align: center;
+    
+}
+
+.nav--primary .nav__item .nav__link {
+
+    @include respond-min($bp3) {
+        text-transform: uppercase;
+        text-align: center;
+        position: relative;
+        font-size: 1.1rem;
+        padding: $base/2 0;
+        margin: 0 $base;
+    
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.nav--primary .nav__item.is-current .nav__link {
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+
+
+/* $. Tertiary
+\*----------------------------------------------------------------*/
+
+.nav--tertiary {
+    padding-bottom: $base*2;
+}
+
+.nav--tertiary .nav__item {
+    display: block;
+    margin-bottom: 0;
+
+    @include respond-min($bp3) {
+
+        &:last-child .nav__link {
+            margin: 0.5rem 0 0.5rem 0;
+        }
+
+        &.is-current .nav__link {
+            color: $grey;
+            text-decoration: none;
+            border-bottom: 1px solid $grey;
+        }
+    }
+
+}
+
+.nav--tertiary .nav__link {
+    display: block;
+    font-size: 1rem;
+    color: $black;
+
+    @include respond-min($bp3) {
+        margin: 0.5rem 1rem 0.5rem 0;
+        border-bottom: 1px solid $black;
+
+        &:hover {
+            color: $color-text;
+            border-bottom-color: $color-text;
+        }
+    }
+}
+
+
+/* $. Shared styles
+\*----------------------------------------------------------------*/
+
+
+
+.nav--primary .nav__item,
+.nav--secondary .nav__item {
+    display: block;
+    margin-bottom: 0;
+
+    &.is-current .nav__link {
+        background-color: lighten($grey, 5%);
+    }
+
+    @include respond-min($bp3) {
+        display: inline-block;
+        &.is-current .nav__link {
+            background-color: inherit;
+        }
+    }
+}
+
+.nav--primary .nav__link,
+.nav--secondary .nav__link {
+    display: block;
+    color: white;
+    padding: $base/2 $base;
+
+    @include respond-min($bp3) {
+        padding: inherit;
+    }
+}

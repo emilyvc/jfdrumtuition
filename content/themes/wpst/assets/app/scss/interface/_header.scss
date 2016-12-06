@@ -1,0 +1,95 @@
+/**
+ * Title:
+ *    Header
+ * Description:
+ *    Header layout module, used to define the header at the top of each page.
+ *    This could be used in combination with other components to create a
+ *    fully-fledged design.
+ * Sections:
+ *    $. Base
+ *    $. Logo
+ *    $. Nav
+ *    $. Toggle
+ *    $. Search
+ */
+
+
+
+/* $. Base
+\*----------------------------------------------------------------*/
+
+.header {
+    @extend %cf;
+    position: relative;
+    background-color: $black;
+    padding: $base/2;
+
+    @include respond-min($bp3) {
+        padding: 0;
+    }
+}
+
+/* $. Wrapper
+\*----------------------------------------------------------------*/
+
+.header__wrap {
+    width: 100%;
+    margin: 0 auto;
+
+    @include respond-min($bp3) {
+        position: relative;
+        width: 85%;
+        min-width: 15em; // 240px
+        max-width: 68.5em; // 1233px
+    }
+}
+
+
+/* $. Logo
+\*----------------------------------------------------------------*/
+
+.header__logo {
+    @include respond-min($bp3) {
+        position: absolute;
+        top: $base*3.5;
+        left: 0;
+        z-index: 11;
+    }
+}
+
+
+/* $. Nav
+\*----------------------------------------------------------------*/
+
+.header__nav {
+    display: none;
+    background-color: $black;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    z-index: $z-index-3;
+
+    .is-active-nav & {
+        display: block;
+    }
+
+    @include respond-min($bp1) {
+        width: auto;
+    }
+
+    @include respond-min($bp3) {
+        display: block;
+        position: static;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        overflow-y: visible;
+        background-color: inherit;
+    }
+}

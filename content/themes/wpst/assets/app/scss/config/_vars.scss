@@ -49,22 +49,19 @@ $green:               #34AB00;
 $yellow:              #1B49BE;
 
 /* secondary */
-$blue-light:          #28AAE1;
+
 
 /**
  * UI colours
  */
+$color-link: $grey-dark;
 
 /* shades */
 $color-text:          $grey-dark;
 $color-background:    $white;
-$color-link:          $blue-light;
 
 /* palette */
-$color-brand-blue:    $blue;
-$color-brand-red:     $red;
-$color-brand-green:   $green;
-$color-brand-yellow:  $yellow;
+$color-brand:    $blue;
 
 /* states */
 $color-success:       #2ECC71;
@@ -75,7 +72,7 @@ $color-error:         #E74C3C;
 /* $. Typography
 \*----------------------------------------------------------------*/
 
-$font: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+$font: 'Montserrat', Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
 
 $weight-normal:  300;
 $weight-medium:  500;
