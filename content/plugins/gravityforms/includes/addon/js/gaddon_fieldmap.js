@@ -100,8 +100,6 @@ var gfieldmap = function( options ) {
 						$elem.find( '.key' ).hide();
 					}
 					
-					gform.doAction( 'gform_fieldmap_add_row', obj, $elem, item );
-					
 				},
 				save: function( obj, data ) {
 					

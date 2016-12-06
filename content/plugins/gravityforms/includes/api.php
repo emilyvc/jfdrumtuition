@@ -21,17 +21,15 @@ class GFAPI {
 	// FORMS ----------------------------------------------------
 
 	/**
-	 * Returns the form object for a given Form ID.
+	 * Returns the form object for a given Form ID
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::get_form_meta()
-	 * @uses GFFormsModel::get_form()
+	 * @param int $form_id The ID of the Form
 	 *
-	 * @param int $form_id The ID of the Form.
-	 *
-	 * @return mixed The form meta array or false.
+	 * @return mixed The form meta array or false
 	 */
 	public static function get_form( $form_id ) {
 
@@ -42,7 +40,7 @@ class GFAPI {
 			return false;
 		}
 
-		// Loading form columns into meta.
+		//loading form columns into meta
 		$form_info            = GFFormsModel::get_form( $form_id, true );
 		$form['is_active']    = $form_info->is_active;
 		$form['date_created'] = $form_info->date_created;
@@ -53,18 +51,16 @@ class GFAPI {
 	}
 
 	/**
-	 * Returns all the form objects.
+	 * Returns all the form objects
 	 *
 	 * @since  1.8.11.5
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::get_form_ids()
-	 * @uses GFAPI::get_form()
+	 * @param bool $active
+	 * @param bool $trash
 	 *
-	 * @param bool $active True if active forms are returned. False to get inactive forms. Defaults to true.
-	 * @param bool $trash  True if trashed forms are returned. False to exclude trash. Defaults to false.
-	 *
-	 * @return array The array of Form Objects.
+	 * @return mixed The array of Forms
 	 */
 	public static function get_forms( $active = true, $trash = false ) {
 
@@ -82,16 +78,13 @@ class GFAPI {
 	}
 
 	/**
-	 * Deletes the forms with the given Form IDs.
+	 * Deletes the forms with the given Form IDs
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::delete_forms()
-	 *
-	 * @param array $form_ids An array of form IDs to delete.
-	 *
-	 * @return void
+	 * @param array $form_ids An array of form IDs to delete
 	 */
 	public static function delete_forms( $form_ids ) {
 
@@ -99,17 +92,15 @@ class GFAPI {
 	}
 
 	/**
-	 * Deletes the form with the given Form ID.
+	 * Deletes the form with the given Form ID
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFAPI::get_form()
-	 * @uses GFAPI::delete_forms()
+	 * @param int $form_id The ID of the Form to delete
 	 *
-	 * @param int $form_id The ID of the Form to delete.
-	 *
-	 * @return mixed True for success, or a WP_Error instance.
+	 * @return mixed True for success, or a WP_Error instance
 	 */
 	public static function delete_form( $form_id ) {
 		$form = self::get_form( $form_id );
@@ -122,16 +113,15 @@ class GFAPI {
 	}
 
 	/**
-	 * Updates the forms with an array of form objects.
+	 * Updates the forms with an array of form objects
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFAPI::update_form()
+	 * @param array $forms The Form objects
 	 *
-	 * @param array $forms Array of form objects.
-	 *
-	 * @return mixed True for success, or a WP_Error instance.
+	 * @return mixed True for success, or a WP_Error instance
 	 */
 	public static function update_forms( $forms ) {
 
@@ -150,15 +140,12 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
-	 *
-	 * @uses \GFFormsModel::get_meta_table_name()
-	 * @uses \GFFormsModel::update_form_meta()
+	 * @static
 	 *
 	 * @param array $form The Form object
-	 * @param int   $form_id  Optional. If specified, then the ID in the Form Object will be ignored.
+	 * @param int   $form_id   Optional. If specified, then the ID in the Form object will be ignored
 	 *
-	 * @return bool|WP_Error True for success, or a WP_Error instance.
+	 * @return mixed True for success, or a WP_Error instance
 	 */
 	public static function update_form( $form, $form_id = null ) {
 		global $wpdb;
@@ -171,7 +158,7 @@ class GFAPI {
 		if ( empty( $form_id ) ) {
 			$form_id = $form['id'];
 		} else {
-			// Make sure the form object has the right form id.
+			// make sure the form object has the right form id
 			$form['id'] = $form_id;
 			if ( isset( $form['fields'] ) ) {
 				foreach ( $form['fields'] as &$field ) {
@@ -194,7 +181,7 @@ class GFAPI {
 			return new WP_Error( 'not_found', __( 'Form not found', 'gravityforms' ) );
 		}
 
-		// Strip confirmations and notifications.
+		// Strip confirmations and notifications
 		$form_display_meta = $form;
 		unset( $form_display_meta['confirmations'] );
 		unset( $form_display_meta['notifications'] );
@@ -218,7 +205,7 @@ class GFAPI {
 			}
 		}
 
-		// Updating form title and is_active flag.
+		//updating form title and is_active flag
 		$is_active = rgar( $form, 'is_active' ) ? '1' : '0';
 		$result    = $wpdb->query( $wpdb->prepare( "UPDATE {$form_table_name} SET title=%s, is_active=%s WHERE id=%d", $form['title'], $is_active, $form['id'] ) );
 		if ( false === $result ) {
@@ -233,13 +220,11 @@ class GFAPI {
 	 *
 	 * @since  1.8.3.15
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::get_form_table_name()
-	 * @uses GFFormsModel::get_form_db_columns()
-	 *
-	 * @param array $form_ids     The IDs of the forms to update.
-	 * @param array $property_key The name of the column in the database e.g. is_trash, is_active, title.
-	 * @param array $value        The new value.
+	 * @param array $form_ids     The IDs of the forms to update
+	 * @param array $property_key The name of the column in the database e.g. is_trash, is_active, title
+	 * @param array $value        The new value
 	 *
 	 * @return mixed Either a WP_Error instance or the result of the query
 	 */
@@ -273,16 +258,15 @@ class GFAPI {
 	}
 
 	/**
-	 * Updates the property of one form - columns in the main forms table. e.g. is_trash, is_active, title.
+	 * Updates the property of one form - columns in the main forms table. e.g. is_trash, is_active, title
 	 *
 	 * @since  1.8.3.15
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFAPI::update_forms_property()
-	 *
-	 * @param array|int $form_id      The ID of the forms to update.
-	 * @param string    $property_key The name of the column in the database e.g. is_trash, is_active, title.
-	 * @param string    $value        The new value.
+	 * @param array|int $form_id      The ID of the forms to update
+	 * @param string    $property_key The name of the column in the database e.g. is_trash, is_active, title
+	 * @param string    $value        The new value
 	 *
 	 * @return mixed Either a WP_Error instance or the result of the query
 	 */
@@ -296,12 +280,11 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFAPI::add_form()
+	 * @param array $forms The Form objects
 	 *
-	 * @param array $forms The Form Objects.
-	 *
-	 * @return array|WP_Error Either an array of new form IDs or a WP_Error instance.
+	 * @return mixed Either an array of new form IDs or a WP_Error instance
 	 */
 	public static function add_forms( $forms ) {
 
@@ -325,16 +308,11 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
+	 * @static
 	 *
-	 * @uses GFFormsModel::is_unique_title()
-	 * @uses GFFormsModel::insert_form()
-	 * @uses GFAPI::set_property_as_key()
-	 * @uses GFFormsModel::update_form_meta()
+	 * @param array $form_meta The Form object
 	 *
-	 * @param array $form_meta The Form object.
-	 *
-	 * @return int|WP_Error Either the new Form ID or a WP_Error instance.
+	 * @return mixed Either the new Form ID or a WP_Error instance
 	 */
 	public static function add_form( $form_meta ) {
 		global $wpdb;
@@ -346,7 +324,7 @@ class GFAPI {
 		if ( rgar( $form_meta, 'title' ) == '' ) {
 			return new WP_Error( 'missing_title', __( 'The form title is missing', 'gravityforms' ) );
 		}
-		// Making sure title is not duplicate.
+		//Making sure title is not duplicate
 		$title = $form_meta['title'];
 		$count = 2;
 		while ( ! RGFormsModel::is_unique_title( $title ) ) {
@@ -354,13 +332,13 @@ class GFAPI {
 			$count ++;
 		}
 
-		// Inserting form.
+		//inserting form
 		$form_id = RGFormsModel::insert_form( $title );
 
-		// Updating form meta.
+		//updating form meta
 		$form_meta['title'] = $title;
 
-		// Updating object's id property.
+		//updating object's id property
 		$form_meta['id'] = $form_id;
 
 		if ( isset( $form_meta['confirmations'] ) ) {
@@ -375,7 +353,7 @@ class GFAPI {
 			unset( $form_meta['notifications'] );
 		}
 
-		// Updating form meta.
+		//updating form meta
 		$result = GFFormsModel::update_form_meta( $form_id, $form_meta );
 
 		if ( false === $result ) {
@@ -390,6 +368,7 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access private
+	 * @static
 	 * @ignore
 	 */
 	private static function set_property_as_key( $array, $property ) {
@@ -410,8 +389,8 @@ class GFAPI {
 	 *     $search_criteria['status'] = 'active';
 	 *
 	 *  Filter by date range
-	 *     $search_criteria['start_date'] = $start_date; // Using the time zone in the general settings.
-	 *     $search_criteria['end_date'] =  $end_date;    // Using the time zone in the general settings.
+	 *     $search_criteria['start_date'] = $start_date;
+	 *     $search_criteria['end_date'] =  $end_date;
 	 *
 	 *  Filter by any column in the main table
 	 *     $search_criteria['field_filters'][] = array("key" => 'currency', value => 'USD');
@@ -453,19 +432,19 @@ class GFAPI {
 	 *  Paging
 	 *     $paging = array('offset' => 0, 'page_size' => 20 );
 	 *
+	 *
+	 *
 	 * @since  1.8
 	 * @access public
-	 *
-	 * @uses GFFormsModel::search_leads()
-	 * @uses GFAPI::count_entries()
+	 * @static
 	 *
 	 * @param int|array $form_ids        The ID of the form or an array IDs of the Forms. Zero for all forms.
-	 * @param array     $search_criteria Optional. An array containing the search criteria. Defaults to empty array.
-	 * @param array     $sorting         Optional. An array containing the sorting criteria. Defaults to null.
-	 * @param array     $paging          Optional. An array containing the paging criteria. Defaults to null.
-	 * @param int       $total_count     Optional. An output parameter containing the total number of entries. Pass a non-null value to get the total count. Defaults to null.
+	 * @param array     $search_criteria Optional. An array containing the search criteria
+	 * @param array     $sorting         Optional. An array containing the sorting criteria
+	 * @param array     $paging          Optional. An array containing the paging criteria
+	 * @param int       $total_count     Optional. An output parameter containing the total number of entries. Pass a non-null value to get the total count.
 	 *
-	 * @return array|WP_Error Either an array of the Entry objects or a WP_Error instance.
+	 * @return mixed Either an array of the Entry objects or a WP_Error instance
 	 */
 	public static function get_entries( $form_ids, $search_criteria = array(), $sorting = null, $paging = null, &$total_count = null ) {
 
@@ -489,29 +468,27 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::count_search_leads()
+	 * @param int|array $form_ids        The ID of the Form or an array of Form IDs
+	 * @param array     $search_criteria Optional. An array containing the search criteria
 	 *
-	 * @param int|array $form_ids        The ID of the Form or an array of Form IDs.
-	 * @param array     $search_criteria Optional. An array containing the search criteria. Defaults to empty array.
-	 *
-	 * @return int The total count.
+	 * @return int The total count
 	 */
 	public static function count_entries( $form_ids, $search_criteria = array() ) {
 		return GFFormsModel::count_search_leads( $form_ids, $search_criteria );
 	}
 
 	/**
-	 * Returns the Entry object for a given Entry ID.
+	 * Returns the Entry object for a given Entry ID
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFAPI::get_entries()
+	 * @param int $entry_id The ID of the Entry
 	 *
-	 * @param int $entry_id The ID of the Entry.
-	 *
-	 * @return array|WP_Error The Entry object or a WP_Error instance.
+	 * @return mixed The Entry object or a WP_Error instance
 	 */
 	public static function get_entry( $entry_id ) {
 
@@ -532,13 +509,12 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 *
-	 * @uses GFAPI::add_entry()
+	 * @static
 	 *
 	 * @param array $entries The Entry objects
-	 * @param int   $form_id Optional. If specified, the form_id in the Entry objects will be ignored. Defaults to null.
+	 * @param int   $form_id Optional. If specified, the form_id in the Entry objects will be ignored
 	 *
-	 * @return array|WP_Error Either an array of new Entry IDs or a WP_Error instance
+	 * @return mixed Either an array of new Entry IDs or a WP_Error instance
 	 */
 	public static function add_entries( $entries, $form_id = null ) {
 
@@ -562,13 +538,11 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 *
-	 * @uses GFCommon::log_debug()
-	 * @uses GFAPI::update_entry()
+	 * @static
 	 *
 	 * @param array $entries The Entry objects
 	 *
-	 * @return bool|WP_Error Either true for success, or a WP_Error instance
+	 * @return mixed Either True for success, or a WP_Error instance
 	 */
 	public static function update_entries( $entries ) {
 
@@ -585,35 +559,16 @@ class GFAPI {
 	}
 
 	/**
-	 * Updates an entire single Entry object.
-	 *
-	 * If the date_created value is not set then the current time UTC will be used.
-	 * The date_created value, if set, is expected to be in 'Y-m-d H:i:s' format (UTC).
+	 * Updates a single Entry object.
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
-	 * @global $current_user
+	 * @static
 	 *
-	 * @uses \GFAPI::get_entry
-	 * @uses \GFAPI::form_id_exists
-	 * @uses \GFFormsModel::get_ip
-	 * @uses \GFFormsModel::get_current_page_url
-	 * @uses \GFCommon::get_currency
-	 * @uses \GFFormsModel::get_lead_table_name
-	 * @uses \GFFormsModel::get_lead_details_table_name
-	 * @uses \GFFormsModel::get_form_meta
-	 * @uses \GFFormsModel::get_input_type
-	 * @uses \GF_Field::get_entry_inputs
-	 * @uses \GFFormsModel::get_lead_detail_id
-	 * @uses \GFFormsModel::update_lead_field_value
-	 * @uses \GFFormsModel::get_entry_meta
-	 * @uses \GFFormsModel::get_field
+	 * @param array $entry    The Entry object
+	 * @param int   $entry_id Optional. If specified, the ID in the Entry object will be ignored
 	 *
-	 * @param array $entry    The Entry Object.
-	 * @param int   $entry_id Optional. If specified, the ID in the Entry Object will be ignored. Defaults to null.
-	 *
-	 * @return true|WP_Error Either True or a WP_Error instance
+	 * @return mixed Either True or a WP_Error instance
 	 */
 	public static function update_entry( $entry, $entry_id = null ) {
 		global $wpdb;
@@ -640,7 +595,7 @@ class GFAPI {
 			return $current_entry;
 		}
 
-		// Make sure the form id exists
+		// make sure the form id exists
 		$form_id = rgar( $entry, 'form_id' );
 		if ( empty( $form_id ) ) {
 			$form_id = rgar( $current_entry, 'form_id' );
@@ -650,17 +605,10 @@ class GFAPI {
 			return new WP_Error( 'invalid_form_id', __( 'The form for this entry does not exist', 'gravityforms' ) );
 		}
 
-		/**
-		 * Filters the entry before it is updated.
-		 *
-		 * @since Unknown
-		 *
-		 * @param array $entry          The Entry Object.
-		 * @param array $original_entry Te original Entry Object, before changes.
-		 */
+
 		$entry = apply_filters( 'gform_entry_pre_update', $entry, $original_entry );
 
-		// Use values in the entry object if present
+		// use values in the entry object if present
 		$post_id        = isset( $entry['post_id'] ) ? intval( $entry['post_id'] ) : 'NULL';
 		$date_created   = isset( $entry['date_created'] ) ? sprintf( "'%s'", esc_sql( $entry['date_created'] ) ) : 'utc_timestamp()';
 		$is_starred     = isset( $entry['is_starred'] ) ? $entry['is_starred'] : 0;
@@ -717,7 +665,7 @@ class GFAPI {
 			return new WP_Error( 'update_entry_properties_failed', __( 'There was a problem while updating the entry properties', 'gravityforms' ), $wpdb->last_error );
 		}
 
-		// Only save field values for fields that currently exist in the form. The rest in $entry will be ignored. The rest in $current_entry will get deleted.
+		// only save field values for fields that currently exist in the form. The rest in $entry will be ignored. The rest in $current_entry will get deleted.
 
 		$lead_detail_table = GFFormsModel::get_lead_details_table_name();
 		$current_fields    = $wpdb->get_results( $wpdb->prepare( "SELECT id, field_number FROM $lead_detail_table WHERE lead_id=%d", $entry_id ) );
@@ -761,7 +709,7 @@ class GFAPI {
 			}
 		}
 
-		// Save the entry meta values - only for the entry meta currently available for the form, ignore the rest.
+		// save the entry meta values - only for the entry meta currently available for the form, ignore the rest
 		$entry_meta = GFFormsModel::get_entry_meta( $form_id );
 		if ( is_array( $entry_meta ) ) {
 			foreach ( array_keys( $entry_meta ) as $key ) {
@@ -774,7 +722,7 @@ class GFAPI {
 			}
 		}
 
-		// Now delete remaining values from the old entry.
+		// now delete remaining values from the old entry
 
 		if ( is_array( $entry_meta ) ) {
 			foreach ( array_keys( $entry_meta ) as $meta_key ) {
@@ -797,9 +745,7 @@ class GFAPI {
 		/**
 		 * Fires after the Entry is updated.
 		 *
-		 * @since Unknown.
-		 *
-		 * @param array $lead           The entry object after being updated.
+		 * @param array $lead The entry object after being updated.
 		 * @param array $original_entry The entry object before being updated.
 		 */
 		gf_do_action( array( 'gform_post_update_entry', $form_id ), $entry, $original_entry );
@@ -815,22 +761,11 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
-	 * @global $current_user
+	 * @static
 	 *
-	 * @uses GFAPI::form_id_exists()
-	 * @uses GFFormsModel::get_ip()
-	 * @uses GFFormsModel::get_current_page_url()
-	 * @uses GFCommon::get_currency()
-	 * @uses GFFormsModel::get_lead_table_name()
-	 * @uses GF_Field::get_entry_inputs()
-	 * @uses GFFormsModel::update_lead_field_value()
-	 * @uses GFFormsModel::get_entry_meta()
-	 * @uses GFAPI::get_entry()
+	 * @param array $entry The Entry object
 	 *
-	 * @param array $entry The Entry Object.
-	 *
-	 * @return int|WP_Error Either the new Entry ID or a WP_Error instance.
+	 * @return mixed Either the new Entry ID or a WP_Error instance
 	 */
 	public static function add_entry( $entry ) {
 		global $wpdb;
@@ -839,7 +774,7 @@ class GFAPI {
 			return new WP_Error( 'invalid_entry_object', __( 'The entry object must be an array', 'gravityforms' ) );
 		}
 
-		// Make sure the form id exists.
+		// make sure the form id exists
 		$form_id = rgar( $entry, 'form_id' );
 		if ( empty( $form_id ) ) {
 			return new WP_Error( 'empty_form_id', __( 'The form id must be specified', 'gravityforms' ) );
@@ -849,7 +784,7 @@ class GFAPI {
 			return new WP_Error( 'invalid_form_id', __( 'The form for this entry does not exist', 'gravityforms' ) );
 		}
 
-		// Use values in the entry object if present
+		// use values in the entry object if present
 		$post_id        = isset( $entry['post_id'] ) ? intval( $entry['post_id'] ) : 'NULL';
 		$date_created   = isset( $entry['date_created'] ) && $entry['date_created'] != '' ? sprintf( "'%s'", esc_sql( $entry['date_created'] ) ) : 'utc_timestamp()';
 		$is_starred     = isset( $entry['is_starred'] ) ? $entry['is_starred'] : 0;
@@ -888,11 +823,12 @@ class GFAPI {
 		if ( false === $result ) {
 			return new WP_Error( 'insert_entry_properties_failed', __( 'There was a problem while inserting the entry properties', 'gravityforms' ), $wpdb->last_error );
 		}
-		// Reading newly created lead id.
+		// reading newly created lead id
 		$entry_id    = $wpdb->insert_id;
 		$entry['id'] = $entry_id;
 
-		// Only save field values for fields that currently exist in the form.
+		// only save field values for fields that currently exist in the form
+
 		$form = GFFormsModel::get_form_meta( $form_id );
 		foreach ( $form['fields'] as $field ) {
 			/* @var GF_Field $field */
@@ -920,7 +856,7 @@ class GFAPI {
 			}
 		}
 
-		// Add save the entry meta values - only for the entry meta currently available for the form, ignore the rest.
+		// add save the entry meta values - only for the entry meta currently available for the form, ignore the rest
 		$entry_meta = GFFormsModel::get_entry_meta( $form_id );
 		if ( is_array( $entry_meta ) ) {
 			foreach ( array_keys( $entry_meta ) as $key ) {
@@ -938,8 +874,8 @@ class GFAPI {
          *
          * @since  1.9.14.26
 		 *
-		 * @param array $entry The Entry Object added.
-         * @param array $form  The Form Object added.
+		 * @param array $entry
+         * @param array $form
 		 */
 		do_action( 'gform_post_add_entry', $entry, $form );
 
@@ -951,13 +887,11 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::get_lead()
-	 * @uses GFFormsModel::delete_lead()
+	 * @param int $entry_id The ID of the Entry object
 	 *
-	 * @param int $entry_id The ID of the Entry object.
-	 *
-	 * @return bool|WP_Error Either true for success or a WP_Error instance.
+	 * @return mixed Either true for success or a WP_Error instance
 	 */
 	public static function delete_entry( $entry_id ) {
 
@@ -975,14 +909,13 @@ class GFAPI {
 	 *
 	 * @since  1.8.3.1
 	 * @access public
+	 * @static
 	 *
-	 * @uses GFFormsModel::update_lead_property()
+	 * @param int    $entry_id The ID of the Entry object
+	 * @param string $property The property of the Entry object to be updated
+	 * @param mixed  $value    The value to which the property should be set
 	 *
-	 * @param int    $entry_id The ID of the Entry object.
-	 * @param string $property The property of the Entry object to be updated.
-	 * @param mixed  $value    The value to which the property should be set.
-	 *
-	 * @return bool Whether the entry property was updated successfully.
+	 * @return bool Whether the entry property was updated successfully
 	 */
 	public static function update_entry_property( $entry_id, $property, $value ) {
 		return GFFormsModel::update_lead_property( $entry_id, $property, $value );
@@ -993,21 +926,16 @@ class GFAPI {
 	 *
 	 * @since  1.9
 	 * @access public
-	 * @global $wpdb
+	 * @static
 	 *
-	 * @uses GFAPI::get_entry()
-	 * @uses GFAPI::get_form()
-	 * @uses GFFormsModel::get_field()
-	 * @uses GFFormsModel::get_lead_details_table_name()
-	 * @uses GFFormsModel::update_lead_field_value()
-	 *
-	 * @param int    $entry_id The ID of the Entry object.
+	 * @param int    $entry_id The ID of the Entry object
 	 * @param string $input_id The id of the input to be updated. For single input fields such as text, paragraph, website, drop down etc... this will be the same as the field ID.
-	 *                         For multi input fields such as name, address, checkboxes, etc... the input id will be in the format {FIELD_ID}.{INPUT NUMBER}. ( i.e. "1.3" ).
+	 *                         For multi input fields such as name, address, checkboxes, etc... the input id will be in the format {FIELD_ID}.{INPUT NUMBER}. ( i.e. "1.3" )
 	 *                         The $input_id can be obtained by inspecting the key for the specified field in the $entry object.
-	 * @param mixed  $value    The value to which the field should be set.
 	 *
-	 * @return bool|array Whether the entry property was updated successfully. If there's an error getting the entry, the entry object.
+	 * @param mixed  $value    The value to which the field should be set
+	 *
+	 * @return bool Whether the entry property was updated successfully
 	 */
 	public static function update_entry_field( $entry_id, $input_id, $value ) {
 		global $wpdb;
@@ -1077,21 +1005,14 @@ class GFAPI {
 	 * 'confirmation_message' => string 'Please use the following link to return to your form from any computer. [snip]'
 	 * 'resume_token' => string '045f941cc4c04d479556bab1db6d3495'
 	 *
-	 * @since  Unknown
-	 * @access public
-	 *
-	 * @uses GFAPI::get_form()
-	 * @uses GFCommon::get_base_path()
-	 * @uses GFFormDisplay::process_form()
-	 * @uses GFFormDisplay::replace_save_variables()
 	 *
 	 * @param int $form_id The Form ID
-	 * @param array $input_values An array of values. Not $_POST, that will be automatically merged with the $input_values.
+	 * @param array $input_values An array of values.
 	 * @param array $field_values Optional.
 	 * @param int $target_page Optional.
 	 * @param int $source_page Optional.
 	 *
-	 * @return array|WP_Error An array containing the result of the submission.
+	 * @return array An array containing the result of the submission.
 	 */
 	public static function submit_form( $form_id, $input_values, $field_values = array(), $target_page = 0, $source_page = 1 ) {
 		$form_id = absint( $form_id );
@@ -1107,7 +1028,7 @@ class GFAPI {
 		$input_values[ 'gform_source_page_number_' . $form_id ] = absint( $source_page );
 		$input_values['gform_field_values']                     = $field_values;
 
-		require_once( GFCommon::get_base_path() . '/form_display.php' );
+		require_once(GFCommon::get_base_path() . '/form_display.php');
 
 		if ( ! isset( $_POST ) ) {
 			$_POST = array();
@@ -1165,14 +1086,14 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
+	 * @static
 	 *
-	 * @param mixed  $feed_ids   The ID of the Feed or an array of Feed IDs.
-	 * @param int    $form_id    The ID of the Form to which the Feeds belong.
-	 * @param string $addon_slug The slug of the add-on to which the Feeds belong.
-	 * @param bool   $is_active  If the feed is active.
+	 * @param mixed  $feed_ids   The ID of the Feed or an array of Feed IDs
+	 * @param int    $form_id    The ID of the Form to which the Feeds belong
+	 * @param string $addon_slug The slug of the add-on to which the Feeds belong
+	 * @param bool   $is_active
 	 *
-	 * @return array|WP_Error Either an array of Feed objects or a WP_Error instance.
+	 * @return mixed Either an array of Feed objects or a WP_Error instance
 	 */
 	public static function get_feeds( $feed_ids = null, $form_id = null, $addon_slug = null, $is_active = true ) {
 		global $wpdb;
@@ -1213,15 +1134,15 @@ class GFAPI {
 	}
 
 	/**
-	 * Deletes a single Feed.
+	 * Deletes a single Feed
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
+	 * @static
 	 *
-	 * @param int $feed_id The ID of the Feed to delete.
+	 * @param int $feed_id The ID of the Feed to delete
 	 *
-	 * @return bool|WP_Error True if successful, or a WP_Error instance.
+	 * @return mixed Either an array of Feed objects or a WP_Error instance
 	 */
 	public static function delete_feed( $feed_id ) {
 
@@ -1233,7 +1154,7 @@ class GFAPI {
 
 		$results = $wpdb->query( $sql );
 		if ( false === $results ) {
-			return new WP_Error( 'error_deleting', sprintf( __( 'There was an error while deleting feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
+			return new WP_Error( 'error_deleting', sprintf( __( 'There was an an error while deleting feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
 		}
 
 		if ( 0 === $results ) {
@@ -1243,15 +1164,6 @@ class GFAPI {
 		return true;
 	}
 
-	/**
-	 * Updates a feed.
-	 *
-	 * @param int   $feed_id   The ID of the feed being updated.
-	 * @param array $feed_meta The feed meta to replace the existing feed meta.
-	 * @param null  $form_id   The ID of the form that the feed is associated with
-	 *
-	 * @return false|int|WP_Error
-	 */
 	public static function update_feed( $feed_id, $feed_meta, $form_id = null ) {
 		global $wpdb;
 
@@ -1266,7 +1178,7 @@ class GFAPI {
 		$results = $wpdb->query( $sql );
 
 		if ( false === $results ) {
-			return new WP_Error( 'error_updating', sprintf( __( 'There was an error while updating feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
+			return new WP_Error( 'error_updating', sprintf( __( 'There was an an error while updating feed id %s', 'gravityforms' ), $feed_id ), $wpdb->last_error );
 		}
 
 		if ( 0 === $results ) {
@@ -1281,13 +1193,13 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access public
-	 * @global $wpdb
+	 * @static
 	 *
-	 * @param int    $form_id    The ID of the form to which the feed belongs.
-	 * @param array  $feed_meta  The Feed Object.
-	 * @param string $addon_slug The slug of the add-on to which the feeds belong.
+	 * @param int    $form_id    The ID of the Form to which the Feed belongs
+	 * @param array  $feed_meta  The Feed object
+	 * @param string $addon_slug The slug of the add-on to which the Feeds belong
 	 *
-	 * @return int|WP_Error Either the ID of the newly created feed or a WP_Error instance.
+	 * @return mixed Either the ID of the newly created Feed or a WP_Error instance
 	 */
 	public static function add_feed( $form_id, $feed_meta, $addon_slug ) {
 		global $wpdb;
@@ -1299,7 +1211,7 @@ class GFAPI {
 		$results = $wpdb->query( $sql );
 
 		if ( false === $results ) {
-			return new WP_Error( 'error_inserting', __( 'There was an error while inserting a feed', 'gravityforms' ), $wpdb->last_error );
+			return new WP_Error( 'error_inserting', __( 'There was an an error while inserting a feed', 'gravityforms' ), $wpdb->last_error );
 		}
 
 		return $wpdb->insert_id;
@@ -1310,20 +1222,13 @@ class GFAPI {
 	/**
 	 * Sends all active notifications for a form given an entry object and an event.
 	 *
-	 * @since  Unknown
-	 * @access public
-	 *
-	 * @uses GFCommon::log_debug()
-	 * @uses GFCommon::send_notifications()
-	 *
-	 * @param array  $form  The Form Object associated with the notification.
-	 * @param array  $entry The Entry Object associated with the triggered event.
-	 * @param string $event Optional. The event that's firing the notification. Defaults to 'form_submission'.
-	 * @param array  $data  Optional. Array of data which can be used in the notifications via the generic {object:property} merge tag. Defaults to empty array.
+	 * @param $form
+	 * @param $entry
+	 * @param string $event Default = 'form_submission'
 	 *
 	 * @return array
 	 */
-	public static function send_notifications( $form, $entry, $event = 'form_submission', $data = array() ) {
+	public static function send_notifications( $form, $entry, $event = 'form_submission' ) {
 
 		if ( rgempty( 'notifications', $form ) || ! is_array( $form['notifications'] ) ) {
 			return array();
@@ -1334,74 +1239,45 @@ class GFAPI {
 
 		$notifications_to_send = array();
 
-		// Running through filters that disable form submission notifications.
+		//running through filters that disable form submission notifications
 		foreach ( $form['notifications'] as $notification ) {
 			if ( rgar( $notification, 'event' ) != $event ) {
 				continue;
 			}
 
 			if ( $event == 'form_submission' ) {
-				/**
-				 * Disables user notifications.
-				 *
-				 * @since Unknown
-				 *
-				 * @param bool  false  Determines if the notification will be disabled. Set to true to disable the notification.
-				 * @param array $form  The Form Object that triggered the notification event.
-				 * @param array $entry The Entry Object that triggered the notification event.
-				 */
 				if ( rgar( $notification, 'type' ) == 'user' && gf_apply_filters( array( 'gform_disable_user_notification', $form['id'] ), false, $form, $entry ) ) {
 					GFCommon::log_debug( "GFAPI::send_notifications(): Notification is disabled by gform_disable_user_notification hook, not including notification (#{$notification['id']} - {$notification['name']})." );
-					// Skip user notification if it has been disabled by a hook.
+					//skip user notification if it has been disabled by a hook
 					continue;
-				/**
-				 * Disables admin notifications.
-				 *
-				 * @since Unknown
-				 *
-				 * @param bool  false  Determines if the notification will be disabled. Set to true to disable the notification.
-				 * @param array $form  The Form Object that triggered the notification event.
-				 * @param array $entry The Entry Object that triggered the notification event.
-				 */
 				} elseif ( rgar( $notification, 'type' ) == 'admin' && gf_apply_filters( array( 'gform_disable_admin_notification', $form['id'] ), false, $form, $entry ) ) {
 					GFCommon::log_debug( "GFAPI::send_notifications(): Notification is disabled by gform_disable_admin_notification hook, not including notification (#{$notification['id']} - {$notification['name']})." );
-					// Skip admin notification if it has been disabled by a hook.
+					//skip admin notification if it has been disabled by a hook
 					continue;
 				}
 			}
 
-			/**
-			 * Disables notifications.
-			 *
-			 * @since Unknown
-			 *
-			 * @param bool  false  Determines if the notification will be disabled. Set to true to disable the notification.
-			 * @param array $form  The Form Object that triggered the notification event.
-			 * @param array $entry The Entry Object that triggered the notification event.
-			 */
 			if ( gf_apply_filters( array( 'gform_disable_notification', $form['id'] ), false, $notification, $form, $entry ) ) {
 				GFCommon::log_debug( "GFAPI::send_notifications(): Notification is disabled by gform_disable_notification hook, not including notification (#{$notification['id']} - {$notification['name']})." );
-				// Skip notifications if it has been disabled by a hook
+				//skip notifications if it has been disabled by a hook
 				continue;
 			}
 
 			$notifications_to_send[] = $notification['id'];
 		}
 
-		GFCommon::send_notifications( $notifications_to_send, $form, $entry, true, $event, $data );
+		GFCommon::send_notifications( $notifications_to_send, $form, $entry, true, $event );
 	}
 
 
 	// PERMISSIONS ------------------------------------------------
 	/**
 	 * Checks the permissions for the current user. Returns true if the current user has any of the specified capabilities.
-	 *
 	 * IMPORTANT: Call this before calling any of the other API Functions as permission checks are not performed at lower levels.
 	 *
 	 * @since  1.8.5.10
 	 * @access public
-	 *
-	 * @uses GFCommon::current_user_can_any()
+	 * @static
 	 *
 	 * @param array|string $capabilities An array of capabilities, or a single capability
 	 *
@@ -1416,16 +1292,13 @@ class GFAPI {
 	/**
 	 * Returns an array containing the form fields of the specified type or types.
 	 *
-	 * @since  1.9.9.8
-	 * @access public
+	 * @since 1.9.9.8
 	 *
-	 * @param array        $form           The Form Object.
-	 * @param array|string $types          The field types to get. Multiple field types as an array or a single type in a string.
-	 * @param bool         $use_input_type Optional. Defaults to false.
+	 * @param array $form
+	 * @param array|string $types
+	 * @param bool $use_input_type
 	 *
-	 * @uses GFFormsModel::get_fields_by_type()
-	 *
-	 * @return object GF_Field
+	 * @return GF_Field[]
 	 */
 	public static function get_fields_by_type( $form, $types, $use_input_type = false ) {
 		return GFFormsModel::get_fields_by_type( $form, $types, $use_input_type );
@@ -1438,6 +1311,7 @@ class GFAPI {
 	 *
 	 * @since  1.8
 	 * @access private
+	 * @static
 	 * @ignore
 	 */
 	public static function form_id_exists( $form_id ) {

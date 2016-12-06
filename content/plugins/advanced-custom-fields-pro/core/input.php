@@ -245,10 +245,7 @@ class acf_input {
 			'ajax'			=> acf_get_form_data('ajax'),
 			'validation'	=> acf_get_form_data('validation'),
 			'wp_version'	=> $wp_version,
-			'acf_version'	=> acf_get_setting('version'),
-			'browser'		=> acf_get_browser(),
-			'locale'		=> get_locale(),
-			'rtl'			=> is_rtl()
+			'acf_version'	=> acf_get_setting('version')
 		);
 		
 		
@@ -265,25 +262,25 @@ class acf_input {
 		));
 		
 		
-?>
-<script type="text/javascript">
-	acf = acf || {};
-	acf.o = <?php echo json_encode($o); ?>;
-	acf.l10n = <?php echo json_encode($l10n); ?>;
-	<?php do_action('acf/input/admin_footer_js'); ?>
-</script>
-<?php
+		?>
+		<script type="text/javascript">
+			acf = acf || {};
+			acf.o = <?php echo json_encode($o); ?>;
+			acf.l10n = <?php echo json_encode($l10n); ?>;
+			<?php do_action('acf/input/admin_footer_js'); ?>
+		</script>
+		<?php
 
 		
 		// action
 		do_action('acf/input/admin_footer');
 		
 		
-?>
-<script type="text/javascript">
-	acf.do_action('prepare');
-</script>
-<?php
+		?>
+		<script type="text/javascript">
+			acf.do_action('prepare');
+		</script>
+		<?php
 		
 	}
 	
@@ -410,7 +407,7 @@ function acf_set_form_data( $data = array() ) {
 function acf_enqueue_uploader() {
 	
 	// bail early if doing ajax
-	if( acf_is_ajax() ) return;
+	if( defined('DOING_AJAX') && DOING_AJAX ) return;
 	
 	
 	// bail ealry if already run
@@ -426,7 +423,7 @@ function acf_enqueue_uploader() {
 	
 	
 	// create dummy editor
-	?><div id="acf-hidden-wp-editor" class="acf-hidden"><?php wp_editor( '', 'acf_content' ); ?></div><?php
+	?><div class="acf-hidden"><?php wp_editor( '', 'acf_content' ); ?></div><?php
 	
 }
 

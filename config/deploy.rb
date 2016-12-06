@@ -9,7 +9,7 @@ require './config/slack'
 ############################################
 
 set :wp_user, "jakefogarty" # The admin username
-set :wp_email, "hello@emily.vc" # The admin email address
+set :wp_email, "e.cressey@mixd.co.uk" # The admin email address
 set :wp_sitename, "JF Drum Tuition" # The site title
 set :wp_localurl, "http://jfdrumtuition.dev" # Your local environment URL
 

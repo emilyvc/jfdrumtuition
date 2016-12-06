@@ -41,8 +41,7 @@ class acf_field_radio extends acf_field {
 			'default_value'		=> '',
 			'other_choice'		=> 0,
 			'save_other_choice'	=> 0,
-			'allow_null' 		=> 0,
-			'return_format'		=> 'value'
+			'allow_null' 		=> 0
 		);
 		
 		
@@ -124,8 +123,7 @@ class acf_field_radio extends acf_field {
 				'type'		=> 'text',
 				'name'		=> $field['name'],
 				'value'		=> '',
-				'disabled'	=> 'disabled',
-				'class'		=> 'acf-disabled'
+				'disabled'	=> 'disabled'
 			);
 			
 			
@@ -250,9 +248,13 @@ class acf_field_radio extends acf_field {
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Allow Null?','acf'),
 			'instructions'	=> '',
+			'type'			=> 'radio',
 			'name'			=> 'allow_null',
-			'type'			=> 'true_false',
-			'ui'			=> 1,
+			'choices'		=> array(
+				1				=> __("Yes",'acf'),
+				0				=> __("No",'acf'),
+			),
+			'layout'	=>	'horizontal',
 		));
 		
 		
@@ -260,10 +262,9 @@ class acf_field_radio extends acf_field {
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Other','acf'),
 			'instructions'	=> '',
-			'name'			=> 'other_choice',
 			'type'			=> 'true_false',
-			'ui'			=> 1,
-			'message'		=> __("Add 'other' choice to allow for custom values", 'acf'),
+			'name'			=> 'other_choice',
+			'message'		=> __("Add 'other' choice to allow for custom values", 'acf')
 		));
 		
 		
@@ -271,9 +272,8 @@ class acf_field_radio extends acf_field {
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Save Other','acf'),
 			'instructions'	=> '',
-			'name'			=> 'save_other_choice',
 			'type'			=> 'true_false',
-			'ui'			=> 1,
+			'name'			=> 'save_other_choice',
 			'message'		=> __("Save 'other' values to the field's choices", 'acf')
 		));
 		
@@ -300,20 +300,6 @@ class acf_field_radio extends acf_field {
 			)
 		));
 		
-		
-		// return_format
-		acf_render_field_setting( $field, array(
-			'label'			=> __('Return Value','acf'),
-			'instructions'	=> __('Specify the returned value on front end','acf'),
-			'type'			=> 'radio',
-			'name'			=> 'return_format',
-			'layout'		=> 'horizontal',
-			'choices'		=> array(
-				'value'			=> __('Value','acf'),
-				'label'			=> __('Label','acf'),
-				'array'			=> __('Both (Array)','acf')
-			)
-		));
 		
 	}
 	
@@ -447,39 +433,19 @@ class acf_field_radio extends acf_field {
 	
 	function translate_field( $field ) {
 		
-		return acf_get_field_type('select')->translate_field( $field );
+		// translate
+		$field['choices'] = acf_translate( $field['choices'] );
 		
-	}
-	
-	
-	/*
-	*  format_value()
-	*
-	*  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$value (mixed) the value which was loaded from the database
-	*  @param	$post_id (mixed) the $post_id from which the value was loaded
-	*  @param	$field (array) the field array holding all the field options
-	*
-	*  @return	$value (mixed) the modified value
-	*/
-	
-	function format_value( $value, $post_id, $field ) {
 		
-		return acf_get_field_type('select')->format_value( $value, $post_id, $field );
+		// return
+		return $field;
 		
 	}
 	
 }
 
+new acf_field_radio();
 
-// initialize
-acf_register_field_type( new acf_field_radio() );
-
-endif; // class_exists check
+endif;
 
 ?>

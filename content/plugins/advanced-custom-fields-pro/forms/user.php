@@ -105,7 +105,7 @@ class acf_form_user {
 			return;
 			
 		}
-		
+
 		
 		// load acf scripts
 		acf_enqueue_scripts();
@@ -215,7 +215,7 @@ class acf_form_user {
 		
 		
 		// show title
-		//if( $user_form === 'register' ) $show_title = false;
+		if( $user_form === 'register' ) $show_title = false;
 		
 		
 		// args
@@ -302,11 +302,11 @@ class acf_form_user {
 .acf-field input[type="email"],
 .acf-field input[type="url"],
 .acf-field select {
-    max-width: 25em;
+    width: 25em;
 }
 
 .acf-field textarea {
-	max-width: 500px;
+	width: 500px;
 }
 
 
@@ -319,23 +319,10 @@ class acf_form_user {
 .acf-field .acf-field input[type="url"],
 .acf-field .acf-field textarea,
 .acf-field .acf-field select {
-    max-width: none;
+    width: 100%;
 }
 
 <?php else: ?>
-
-#registerform h2 {
-	margin: 1em 0;
-}
-
-#registerform .acf-field .acf-label {
-	margin-bottom: 0;
-}
-
-#registerform .acf-field .acf-label label {
-	font-weight: normal;
-	font-size: 14px;
-}
 
 #registerform p.submit {
 	text-align: right;

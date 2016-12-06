@@ -40,13 +40,6 @@ class acf_field_date_picker extends acf_field {
 			'return_format'		=> 'd/m/Y',
 			'first_day'			=> 1
 		);
-		$this->l10n = array(
-			'closeText'			=> _x('Done',	'Date Picker JS closeText',		'acf'),
-			'currentText'		=> _x('Today',	'Date Picker JS currentText',	'acf'),
-			'nextText'			=> _x('Next',	'Date Picker JS nextText',		'acf'),
-			'prevText'			=> _x('Prev',	'Date Picker JS prevText',		'acf'),
-			'weekHeader'		=> _x('Wk',		'Date Picker JS weekHeader',	'acf'),
-		);
 		
 		
 		// actions
@@ -73,18 +66,19 @@ class acf_field_date_picker extends acf_field {
 	
 	function init() {
 		
-		// globals
 		global $wp_locale;
 		
-		
-		// append
-		$this->l10n = array_merge($this->l10n, array(
-			'monthNames'        => array_values( $wp_locale->month ),
-			'monthNamesShort'   => array_values( $wp_locale->month_abbrev ),
-			'dayNames'          => array_values( $wp_locale->weekday ),
-			'dayNamesMin'       => array_values( $wp_locale->weekday_initial ),
-			'dayNamesShort'     => array_values( $wp_locale->weekday_abbrev )
-		));
+		$this->l10n = array(
+			'closeText'         => __( 'Done', 'acf' ),
+	        'currentText'       => __( 'Today', 'acf' ),
+	        'monthNames'        => array_values( $wp_locale->month ),
+	        'monthNamesShort'   => array_values( $wp_locale->month_abbrev ),
+	        'monthStatus'       => __( 'Show a different month', 'acf' ),
+	        'dayNames'          => array_values( $wp_locale->weekday ),
+	        'dayNamesShort'     => array_values( $wp_locale->weekday_abbrev ),
+	        'dayNamesMin'       => array_values( $wp_locale->weekday_initial ),
+	        'isRTL'             => isset($wp_locale->is_rtl) ? $wp_locale->is_rtl : false,
+		);
 		
 	}
 	
@@ -104,16 +98,12 @@ class acf_field_date_picker extends acf_field {
 	
 	function input_admin_enqueue_scripts() {
 		
-		// bail ealry if no enqueue
-	   	if( !acf_get_setting('enqueue_datepicker') ) return;
-	   	
-	   	
 		// script
 		wp_enqueue_script('jquery-ui-datepicker');
 		
 		
 		// style
-		wp_enqueue_style('acf-datepicker', acf_get_dir('assets/inc/datepicker/jquery-ui.min.css'), '', '1.11.4' );
+		wp_enqueue_style('acf-datepicker', acf_get_dir('assets/inc/datepicker/jquery-ui-1.10.4.custom.min.css'), '', '1.10.4' );
 		
 	}
 	
@@ -132,58 +122,26 @@ class acf_field_date_picker extends acf_field {
 	
 	function render_field( $field ) {
 		
-		// format value
-		$hidden_value = '';
-		$display_value = '';
-		
-		if( $field['value'] ) {
-			
-			$hidden_value = acf_format_date( $field['value'], 'Ymd' );
-			$display_value = acf_format_date( $field['value'], $field['display_format'] );
-			
-		}
-		
-		
 		// vars
 		$e = '';
 		$div = array(
-			'class'					=> 'acf-date-picker acf-input-wrap',
-			'data-date_format'		=> acf_convert_date_to_js($field['display_format']),
+			'class'					=> 'acf-date_picker acf-input-wrap',
+			'data-display_format'	=> acf_convert_date_to_js($field['display_format']),
 			'data-first_day'		=> $field['first_day'],
 		);
-		$hidden = array(
+		$input = array(
 			'id'					=> $field['id'],
 			'class' 				=> 'input-alt',
 			'type'					=> 'hidden',
 			'name'					=> $field['name'],
-			'value'					=> $hidden_value,
+			'value'					=> $field['value'],
 		);
-		$input = array(
-			'class' 				=> 'input',
-			'type'					=> 'text',
-			'value'					=> $display_value,
-		);
-		
-		
-		// save_format - compatibility with ACF < 5.0.0
-		if( !empty($field['save_format']) ) {
 			
-			// add custom JS save format
-			$div['data-save_format'] = $field['save_format'];
-			
-			// revert hidden input value to raw DB value
-			$hidden['value'] = $field['value'];
-			
-			// remove formatted value (will do this via JS)
-			$input['value'] = '';
-			
-		}
-		
-		
+
 		// html
 		$e .= '<div ' . acf_esc_attr($div) . '>';
-			$e .= '<input ' . acf_esc_attr($hidden). '/>';
 			$e .= '<input ' . acf_esc_attr($input). '/>';
+			$e .= '<input type="text" value="" class="input" />';
 		$e .= '</div>';
 		
 		
@@ -219,43 +177,27 @@ class acf_field_date_picker extends acf_field {
 			'name'			=> 'display_format',
 			'other_choice'	=> 1,
 			'choices'		=> array(
-				'd/m/Y'			=> date_i18n('d/m/Y'),
-				'm/d/Y'			=> date_i18n('m/d/Y'),
-				'F j, Y'		=> date_i18n('F j, Y'),
+				'd/m/Y'			=> date('d/m/Y'),
+				'm/d/Y'			=> date('m/d/Y'),
+				'F j, Y'		=> date('F j, Y'),
 			)
 		));
 				
 		
-		// save_format - compatibility with ACF < 5.0.0
-		if( !empty($field['save_format']) ) {
-			
-			// save_format
-			acf_render_field_setting( $field, array(
-				'label'			=> __('Save Format','acf'),
-				'instructions'	=> __('The format used when saving a value','acf'),
-				'type'			=> 'text',
-				'name'			=> 'save_format',
-				//'readonly'		=> 1 // this setting was not readonly in v4
-			));
-			
-		} else {
-			
-			// return_format
-			acf_render_field_setting( $field, array(
-				'label'			=> __('Return Format','acf'),
-				'instructions'	=> __('The format returned via template functions','acf'),
-				'type'			=> 'radio',
-				'name'			=> 'return_format',
-				'other_choice'	=> 1,
-				'choices'		=> array(
-					'd/m/Y'			=> date_i18n('d/m/Y'),
-					'm/d/Y'			=> date_i18n('m/d/Y'),
-					'F j, Y'		=> date_i18n('F j, Y'),
-					'Ymd'			=> date_i18n('Ymd'),
-				)
-			));
-			
-		}
+		// return_format
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Return Format','acf'),
+			'instructions'	=> __('The format returned via template functions','acf'),
+			'type'			=> 'radio',
+			'name'			=> 'return_format',
+			'other_choice'	=> 1,
+			'choices'		=> array(
+				'd/m/Y'			=> date('d/m/Y'),
+				'm/d/Y'			=> date('m/d/Y'),
+				'F j, Y'		=> date('F j, Y'),
+				'Ymd'			=> date('Ymd'),
+			)
+		));
 		
 		
 		// first_day
@@ -288,25 +230,39 @@ class acf_field_date_picker extends acf_field {
 	
 	function format_value( $value, $post_id, $field ) {
 		
-		// save_format - compatibility with ACF < 5.0.0
-		if( !empty($field['save_format']) ) {
+		// bail early if no value
+		if( empty($value) ) {
+			
+			return $value;
+		
+		}
+		
+		
+		// get time
+		$unixtimestamp = strtotime( $value );
+ 
+		
+		// bail early if timestamp is not correct
+		if( !$unixtimestamp ) {
 			
 			return $value;
 			
 		}
 		
 		
+		// translate
+		$value = date_i18n($field['return_format'], $unixtimestamp);
+		
+		
 		// return
-		return acf_format_date( $value, $field['return_format'] );
+		return $value;
 		
 	}
 	
 }
 
+new acf_field_date_picker();
 
-// initialize
-acf_register_field_type( new acf_field_date_picker() );
-
-endif; // class_exists check
+endif;
 
 ?>

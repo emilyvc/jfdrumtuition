@@ -168,9 +168,7 @@ class acf_field_file extends acf_field {
 				<div class="acf-error-message"><p><?php echo $field['value']; ?></p></div>
 			<?php endif; ?>
 			
-			<label class="acf-basic-uploader">
-				<input type="file" name="<?php echo $field['name']; ?>" id="<?php echo $field['id']; ?>" />
-			</label>
+			<input type="file" name="<?php echo $field['name']; ?>" id="<?php echo $field['id']; ?>" />
 			
 		<?php else: ?>
 			
@@ -419,10 +417,8 @@ class acf_field_file extends acf_field {
 	
 }
 
+new acf_field_file();
 
-// initialize
-acf_register_field_type( new acf_field_file() );
-
-endif; // class_exists check
+endif;
 
 ?>

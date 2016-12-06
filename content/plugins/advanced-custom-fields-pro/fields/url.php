@@ -60,13 +60,12 @@ class acf_field_url extends acf_field {
 	function render_field( $field ) {
 		
 		// vars
-		$atts = array();
 		$o = array( 'type', 'id', 'class', 'name', 'value', 'placeholder' );
-		$s = array( 'readonly', 'disabled' );
 		$e = '';
 		
 		
-		// append atts
+		// populate atts
+		$atts = array();
 		foreach( $o as $k ) {
 		
 			$atts[ $k ] = $field[ $k ];	
@@ -74,10 +73,14 @@ class acf_field_url extends acf_field {
 		}
 		
 		
-		// append special atts
-		foreach( $s as $k ) {
+		// special atts
+		foreach( array( 'readonly', 'disabled' ) as $k ) {
 		
-			if( !empty($field[ $k ]) ) $atts[ $k ] = $k;
+			if( !empty($field[ $k ]) ) {
+			
+				$atts[ $k ] = $k;
+				
+			}
 			
 		}
 		
@@ -174,10 +177,8 @@ class acf_field_url extends acf_field {
 	
 }
 
+new acf_field_url();
 
-// initialize
-acf_register_field_type( new acf_field_url() );
-
-endif; // class_exists check
+endif;
 
 ?>
