@@ -26,6 +26,14 @@
         });
     }
 
+    /**
+     * Mobile nav toggle
+     */
+    $('#mobile-nav-toggle').click(function(){
+        $('body').toggleClass('is-active-nav');
+        $(this).toggleClass('icon--menu-open').toggleClass('icon--menu-close');
+    });
+
 })(jQuery);
 
 

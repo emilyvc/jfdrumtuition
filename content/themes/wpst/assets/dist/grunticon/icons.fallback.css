@@ -2,6 +2,8 @@
 
 .icon--logo-mixd { background-image: url('png/logo-mixd.png'); background-repeat: no-repeat; }
 
+.icon--logo-small { background-image: url('png/logo-small.png'); background-repeat: no-repeat; }
+
 .icon--logo { background-image: url('png/logo.png'); background-repeat: no-repeat; }
 
 .icon--menu-close { background-image: url('png/menu-close.png'); background-repeat: no-repeat; }

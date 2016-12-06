@@ -2,10 +2,11 @@
 
 <header class="header">
     <div class="header__wrap">
-
-        <a href="/" class="logo | header__logo | icon--logo-small" title="<?php bloginfo('name'); ?>">
+        <?php if (!is_front_page()): ?> 
+        <span href="/" class="header__logo | icon icon--large icon--logo-small" title="<?php bloginfo('name'); ?>">
             <span class="is-hidden">Visit the homepage</span>
-        </a>
+        </span>
+        <?php endif; ?>
 
         <nav class="nav-container | header__nav" id="navigation" role="navigation">
             <ul class="nav nav--primary | cf">
@@ -13,9 +14,9 @@
             </ul>
         </nav>
 
-        <!-- <button id="mobile-nav-toggle" class="u-button-reset | toggle | icon--menu-open">
+        <a id="mobile-nav-toggle" class="u-button-reset | toggle | icon--menu-open">
             <span class="is-hidden">Toggle mobile menu</span>
-        </button> -->
+        </a>
 
     </div>
 </header>

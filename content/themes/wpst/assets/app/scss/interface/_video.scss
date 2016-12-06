@@ -17,32 +17,28 @@
 .video-container {
   position: relative;
   display: table;
-  height: 80vh;
+  height: 100%;
   width: 100%;
-
-  @include respond-min($bp2) {
-    height: 90vh;
-  }
 }
 
 /* $. Modification
 \*----------------------------------------------------------------*/
 
 .mobile-video {
-  position: fixed;
+  position: absolute;
    right: 0;
    top: 0;
    min-width: 100%;
-   min-height: 100%;
-   width: auto;
+   min-height: 30em;
+   width: 100%;
    z-index: -100;
-   background-image: url("/content/themes/spoke/assets/img/book-film.jpg");
+   background-image: url("/content/themes/wpst/assets/dist/img/jake-bg.jpg");
    background-size: cover;
-   background-position: 82% 0;
+   background-position: center;
 
   @include respond-min($bp2) {
      min-height: 1000px;
-     background-position: 94% 0;
+     background-position: 70% 0;
   }
    @include respond-min($bp4) {
       display: none;
@@ -51,9 +47,9 @@
 
 .video--background {
   display: none;
-  @include respond-min($bp3) {
-    background-image: url("/content/themes/spoke/assets/img/barbicon.jpg");
-    position: fixed;
+  @include respond-min($bp4) {
+    background-image: url("/content/themes/wpst/assets/dist/img/jake-bg.jpg");
+    position: absolute;
     display: block;
      right: 0;
      top: 0;
@@ -76,6 +72,13 @@
 
     @include respond-min($bp1) {
       font-size: 1.65rem;
+      margin-top: $base*5; 
+    }
+    @include respond-min($bp2) {
+      margin-top: $base*10; 
+    }
+    @include respond-min($bp3) {
+      margin-top: $base*7; 
     }
 }
 

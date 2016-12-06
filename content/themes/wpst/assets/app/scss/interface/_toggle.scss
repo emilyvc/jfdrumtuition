@@ -1,0 +1,18 @@
+/**
+ * Mobile nav toggle
+ */
+
+.toggle {
+    position: absolute;
+    top: $base;
+    right: $base;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    z-index: $z-index-5;
+
+    @include respond-min($bp3) {
+        display: none;
+    }
+}

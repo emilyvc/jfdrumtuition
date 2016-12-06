@@ -48,11 +48,41 @@
 
 /* Logos */
 .icon--logo {
-    width: 120px;
-    height: 120px;
+    /* 33% */
+    width: 48px;
+    height: 48px;
+
+    /* 50% */
+    @include respond-min($bp1) {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* 100% */
+    @include respond-min($bp4) {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 .icon--logo-header {
-    width: 980px;
-    height: 110px;
+    /* 33% */
+    width: 323px;
+    height: 36px;
+    
+    /* 40% */
+    @include respond-min($bp1) {
+        width: 441px;
+        height: 49px;   
+    }
+    /* 50% */
+    @include respond-min($bp2) {
+        width: 588px;
+        height: 66px;   
+    }
+    /* 100% */
+    @include respond-min($bp4) {
+        width: 980px;
+        height: 110px;   
+    }
 }

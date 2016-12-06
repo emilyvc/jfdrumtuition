@@ -22,39 +22,26 @@
     @extend %cf;
     position: relative;
     background-color: $black;
-    padding: $base/2;
+    padding: $base*2;
 
     @include respond-min($bp3) {
         padding: 0;
+        padding: $base/2;
     }
 }
 
 /* $. Wrapper
 \*----------------------------------------------------------------*/
 
-.header__wrap {
-    width: 100%;
-    margin: 0 auto;
-
-    @include respond-min($bp3) {
-        position: relative;
-        width: 85%;
-        min-width: 15em; // 240px
-        max-width: 68.5em; // 1233px
-    }
-}
 
 
 /* $. Logo
 \*----------------------------------------------------------------*/
 
 .header__logo {
-    @include respond-min($bp3) {
-        position: absolute;
-        top: $base*3.5;
-        left: 0;
-        z-index: 11;
-    }
+    margin: 0 auto;
+    display: block;
+    z-index: $z-index-4;
 }
 
 
@@ -76,10 +63,6 @@
 
     .is-active-nav & {
         display: block;
-    }
-
-    @include respond-min($bp1) {
-        width: auto;
     }
 
     @include respond-min($bp3) {

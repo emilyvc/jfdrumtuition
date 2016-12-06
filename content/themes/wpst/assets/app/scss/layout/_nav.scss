@@ -25,7 +25,11 @@ $color-nav: $color-link;
 \*----------------------------------------------------------------*/
 
 .nav-container {
-    padding: $base;
+    padding-top: $base*5;
+
+    @include respond-min($bp3) {
+        padding: $base;
+    }
 }
 
 
@@ -56,7 +60,7 @@ $color-nav: $color-link;
 }
 
 .nav--primary .nav__item .nav__link {
-
+    font-size: 1.4rem;
     @include respond-min($bp3) {
         text-transform: uppercase;
         text-align: center;
