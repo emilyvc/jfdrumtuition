@@ -40,7 +40,7 @@ get_header();
                         </div>
                     </div>
 
-                     <h2 class="u-push-top@2 u-push-bottom/2">Videos</h2>
+                     <h2 class="u-push-top@2 u-zero-bottom">Videos</h2>
                     <div class="grid grid--spaced">
                         <div class="grid__item">
                             <?php get_template_part( 'views/page/gallery/videos' ); ?>
