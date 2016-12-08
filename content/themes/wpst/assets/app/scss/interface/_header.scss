@@ -34,7 +34,10 @@
 \*----------------------------------------------------------------*/
 
 .header--main {
-    padding-top: $base;
+    padding: $base;
+    @include respond-min($bp3) {
+        padding-top: $base;
+    }
 }
 
 /* $. Logo

@@ -18,7 +18,7 @@ get_header();
 ?>
 
 <main class="section">
-    <div class="container">
+    <div class="container container--small">
         <?php if ( have_posts() ): ?>
             <?php while ( have_posts() ): ?>
                 <?php the_post(); ?>

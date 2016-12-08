@@ -35,10 +35,10 @@
 .section {
     @extend %cf;
     position: relative;
-    padding: $base 0;
+    padding: $base*2 0;
 
     @include respond-min($bp2) {
-        padding: ($base*2) 0;
+        padding: ($base*3) 0;
     }
 }
 
