@@ -1,11 +1,11 @@
 <a href="#navigation" class="is-hidden">Skip to Navigation</a>
 
-<header class="header">
+<header class="header <?php echo ( !is_front_page() ) ? 'header--main' : ''; ?>">
     <div class="header__wrap">
         <?php if (!is_front_page()): ?> 
-        <span href="/" class="header__logo | icon icon--large icon--logo-small" title="<?php bloginfo('name'); ?>">
+        <a href="/" class="header__logo | icon icon--large icon--logo-small" title="<?php bloginfo('name'); ?>">
             <span class="is-hidden">Visit the homepage</span>
-        </span>
+        </a>
         <?php endif; ?>
 
         <nav class="nav-container | header__nav" id="navigation" role="navigation">

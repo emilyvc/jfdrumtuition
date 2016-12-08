@@ -19,6 +19,18 @@
   display: table;
   height: 100%;
   width: 100%;
+  overflow: hidden;
+  height: 30em;
+  @include respond-min($bp2) {
+    height: 45em;
+  }
+  @include respond-min($bp4) {
+    height: 39em;
+  }
+  @include respond-min($bp5) {
+    height: 45em;
+  }
+  
 }
 
 /* $. Modification
@@ -96,7 +108,7 @@
 .video-tint,
 .overlay-tint {
   background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
+  position: absolute;
   display: block;
   z-index: -1;
   top: 0;
@@ -105,8 +117,5 @@
   width: 100%;
 }
 
-.overlay-tint {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.4);
-}
+
 

@@ -28,7 +28,8 @@ $color-nav: $color-link;
     padding-top: $base*5;
 
     @include respond-min($bp3) {
-        padding: $base;
+        padding-top: $base/2;
+        padding-bottom: 0;
     }
 }
 

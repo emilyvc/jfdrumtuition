@@ -41,4 +41,4 @@
 /* $. Grunticon Load
 \*----------------------------------------------------------------*/
 
-grunticon([ "content/themes/wpst/assets/dist/grunticon/icons.data.svg.css", "content/themes/wpst/assets/dist/grunticon/icons.data.png.css", "content/themes/wpst/assets/dist/grunticon/icons.fallback.css" ]);
+grunticon([ "/content/themes/wpst/assets/dist/grunticon/icons.data.svg.css", "/content/themes/wpst/assets/dist/grunticon/icons.data.png.css", "/content/themes/wpst/assets/dist/grunticon/icons.fallback.css" ]);

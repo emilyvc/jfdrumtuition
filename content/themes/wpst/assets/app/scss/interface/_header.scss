@@ -25,15 +25,17 @@
     padding: $base*2;
 
     @include respond-min($bp3) {
-        padding: 0;
-        padding: $base/2;
+        padding-bottom: $base/2;
+        padding-top: 0;
     }
 }
 
 /* $. Wrapper
 \*----------------------------------------------------------------*/
 
-
+.header--main {
+    padding-top: $base;
+}
 
 /* $. Logo
 \*----------------------------------------------------------------*/

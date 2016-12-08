@@ -14,13 +14,42 @@
 /* $. Footer
 \*----------------------------------------------------------------*/
 
-.footer {
+footer {
     @extend %cf;
+    background-color: $color-brand;
+    padding: $base;
 }
 
-.footer__logo {
+.footer__icons {
+    float: right;
+
+    a {
+        margin-right: $base;
+        margin-bottom: 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
+.footer__contact {
+    float: left;
+    width: 50%;
+    display: table;
+}
+
+.footer__item {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.footer__text {
+    color: $white;
+    opacity: .6;
+    padding-left: $base/2;
+    text-transform: uppercase;
+}
 
 
 /* $. Copyright
