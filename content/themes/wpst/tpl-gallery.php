@@ -9,7 +9,7 @@
  * purposes. To associate this template with WordPress, write the
  * template name underneath like so.
  *
- * Template Name: Example
+ * Template Name: Gallery
  *
  */
 
@@ -27,13 +27,27 @@ get_header();
                 <?php the_post(); ?>
 
                 <article>
-                    <?php the_title(); ?>
-
+                    <h1><?php the_title(); ?></h1>
                     <?php if ( $post->post_excerpt ): ?>
                         <?php echo get_the_excerpt(); ?>
                     <?php endif; ?>
 
-                    <?php the_content(); ?>
+                    <h2 class="u-push-bottom/2">Photos</h2>
+                    <div class="grid grid--spaced">
+                        <div class="grid__item">
+                            <?php get_template_part( 'views/page/gallery/list' ); ?>
+                            <?php get_template_part( 'views/page/gallery/lightbox' ); ?>
+                        </div>
+                    </div>
+
+                     <h2 class="u-push-top@2 u-push-bottom/2">Videos</h2>
+                    <div class="grid grid--spaced">
+                        <div class="grid__item">
+                            <?php get_template_part( 'views/page/gallery/videos' ); ?>
+                        </div>
+                    </div>
+
+
                 </article>
             <?php endwhile; ?>
         <?php else: ?>

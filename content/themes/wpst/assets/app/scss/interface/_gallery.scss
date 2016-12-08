@@ -1,0 +1,264 @@
+/**
+ * Title:
+ *    Gallery
+ * Description:
+ *    Layout for Galleries and gallery items
+ * Sections:
+ *    $. Base
+ *    $. Elements
+ *    $. Modifiers
+ */
+
+
+
+/* $. Base
+\*----------------------------------------------------------------*/
+
+.gallery-list {
+    @extend .cf;
+    @extend .list--unset;
+}
+
+
+
+/* $. Elements
+\*----------------------------------------------------------------*/
+
+.gallery-list__item {
+    float: left;
+    margin-bottom: 0;
+    width: 50%;
+    padding: 0;
+
+    @include respond-min($bp2) {
+        width: 25%;
+    }
+}
+
+.gallery-list__link {
+    display: block;
+    transition: border-color .3s;
+    position: relative;
+    border: solid $base/2 $white;
+
+    &:hover {
+        border-color: lighten($grey-light,20%);
+    }
+
+}
+
+
+/* $. Modifiers
+\*----------------------------------------------------------------*/
+
+.gallery-list--teaser {
+
+    .gallery-list__item {
+
+         &:last-of-type {
+            .gallery-list__link {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: $z-index-1;
+                }
+
+                &:after {
+                    content: 'VIEW ALL';
+                    color: #fff;
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%,-50%);
+                    z-index: $z-index-2;
+                    font-size: 0.875rem;
+                    font-weight: bold;
+                }
+            }
+         }
+    }
+}
+
+
+
+/* $. Lightbox Gallery
+\*----------------------------------------------------------------*/
+
+
+.is-active-gallery {
+    overflow: hidden;
+}
+
+.mixd-gallery {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/modal-overlay.png) left top repeat;
+    z-index: $z-index-6;
+    display: none;
+
+    .is-active-gallery & {
+        display: block;
+
+        @include respond-min($bp4) {
+            display: table;
+        }
+    }
+}
+
+
+.gallery__inner {
+    height: 100%;
+    margin-top: $base*3;
+    overflow-y: auto;
+    background-color: $black;
+
+    @include respond-min($bp2) {
+        margin-top: $base*5;
+    }
+
+    @include respond-min($bp4) {
+        display: table-cell;
+        vertical-align: middle;
+        margin-top: 0;
+    }
+}
+
+.gallery__container {
+    position: relative;
+    overflow: hidden;
+    height: 80%;
+}
+
+.gallery__slides {
+    @extend %cf;
+    @extend %list--unset;
+    position: relative;
+    height:100%;
+
+    img {
+        display: block;
+        margin-top: $base*5;
+
+        @include respond-min($bp3) {
+            margin-top: $base*4;
+        }
+    }
+}
+
+.gallery__slide {
+    @include respond-min($bp3) {
+        float: left;
+        width: 75%;
+    }
+}
+
+//.gallery__item,
+//.gallery__item-inner {
+ //   @extend %cf;
+//}
+
+.gallery__item {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    &:not(:first-child){
+        display: none;
+    }
+}
+
+.gallery__content {
+    position: relative;
+    margin-top: $base;
+
+    @include respond-min($bp3) {
+        float: left;
+        width: 25%;
+        margin-top: $base*4;
+        padding-left: $base;
+    }
+}
+
+
+
+/* $. Elements
+\*----------------------------------------------------------------*/
+
+.gallery__heading {
+    font-weight: 800;
+    color: $color-text;
+}
+
+.gallery__icon {
+    position: absolute;
+    top: $base;
+    right: $base;
+    padding: $base/4;
+    line-height: 0;
+    z-index: $z-index-6;
+}
+
+.gallery__nav {
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index-5;
+    padding: $base $base*1.5;
+
+    a {
+        display: inline-block;
+        margin: 0 0 0 $base*5;
+
+        &:first-child {
+            margin: 0;
+        }
+    }
+}
+
+.gallery__nav-left,
+.gallery__nav-right {
+    position: absolute;
+    top: 50%;
+    transform: translate(-5% , -50%);
+ }
+
+.gallery__nav-left {
+    left: 5%;
+}
+.gallery__nav-right {
+    right: 5%;
+}
+
+.gallery__caption {
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    top: $base*0.75;
+}
+
+.gallery__count {
+    padding: ($base/3) 0 0 ($base*3);
+    font-size: 1.2rem;
+
+    @include respond-min($bp3) {
+        padding: ($base/4) 0 0 ($base*2.75);
+    }
+}

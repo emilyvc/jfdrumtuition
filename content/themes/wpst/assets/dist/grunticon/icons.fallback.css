@@ -16,6 +16,12 @@
 
 .icon--menu-open { background-image: url('png/menu-open.png'); background-repeat: no-repeat; }
 
+.icon--modal-close { background-image: url('png/modal-close.png'); background-repeat: no-repeat; }
+
+.icon--next { background-image: url('png/next.png'); background-repeat: no-repeat; }
+
+.icon--prev { background-image: url('png/prev.png'); background-repeat: no-repeat; }
+
 .icon--select { background-image: url('png/select.png'); background-repeat: no-repeat; }
 
 .icon--youtube { background-image: url('png/youtube.png'); background-repeat: no-repeat; }

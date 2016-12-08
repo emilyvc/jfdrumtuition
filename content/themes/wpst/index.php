@@ -24,7 +24,7 @@ get_header();
                 <?php the_post(); ?>
 
                 <article>
-                    <?php the_title(); ?>
+                    <h1><?php the_title(); ?></h1>
 
                     <?php if ( $post->post_excerpt ): ?>
                         <?php echo get_the_excerpt(); ?>
