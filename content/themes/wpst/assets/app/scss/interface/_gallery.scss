@@ -30,7 +30,7 @@
     width: 50%;
     padding: 0;
 
-    @include respond-min($bp2) {
+    @include respond-min($bp3) {
         width: 25%;
     }
 }
@@ -119,25 +119,30 @@
 
 .gallery__inner {
     height: 100%;
-    margin-top: $base*3;
     overflow-y: auto;
     background-color: $black;
-
-    @include respond-min($bp2) {
-        margin-top: $base*5;
-    }
+    margin-top: 0;
+    padding-top: $base*14;
 
     @include respond-min($bp4) {
         display: table-cell;
         vertical-align: middle;
-        margin-top: 0;
+        padding-top: 0;
     }
 }
 
 .gallery__container {
     position: relative;
     overflow: hidden;
-    height: 80%;
+    height: 35%;
+    
+
+    @include respond-min($bp1) {
+        height: 50%;
+    }
+    @include respond-min($bp3) {
+        height: 80%;
+    }
 }
 
 .gallery__slides {
@@ -150,14 +155,14 @@
         display: block;
         margin-top: $base*5;
 
-        @include respond-min($bp3) {
+        @include respond-min($bp1) {
             margin-top: $base*4;
         }
     }
 }
 
 .gallery__slide {
-    @include respond-min($bp3) {
+    @include respond-min($bp1) {
         float: left;
         width: 75%;
     }
@@ -187,7 +192,7 @@
     position: relative;
     margin-top: $base;
 
-    @include respond-min($bp3) {
+    @include respond-min($bp1) {
         float: left;
         width: 25%;
         margin-top: $base*4;
@@ -216,12 +221,12 @@
 
 .gallery__nav {
     width: 100%;
-    background: #fff;
+    background: $white;
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: $z-index-5;
-    padding: $base $base*1.5;
+    padding: $base*1.5;
 
     a {
         display: inline-block;
