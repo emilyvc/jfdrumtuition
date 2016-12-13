@@ -1,0 +1,65 @@
+/* $. Setup
+\*----------------------------------------------------------------*/
+
+%island {
+    padding: $base*1.5;
+    margin-bottom: $base;
+    clear: both;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    h2, h3 {
+        margin-bottom: $base*0.5;
+        margin-top: 0;
+    }
+}
+
+
+
+/* $. Component
+\*----------------------------------------------------------------*/
+
+.island {
+    @extend %island;
+}
+
+
+
+/* $. Modifications
+\*----------------------------------------------------------------*/
+
+.island--solid {
+    background-color: $grey;
+}
+
+.island--slim {
+    padding: $base;
+}
+
+
+
+/* $. Colour variations
+\*----------------------------------------------------------------*/
+
+.island--featured {
+    background-color: $color-brand;
+    color: $white;
+
+    a,
+    a:hover,
+    a:focus {
+        color: white;
+        border-bottom: 1px solid white !important;
+    }
+
+}
+
+
+
+.island--grey {
+    background-color: $grey-lighter;
+    color: $grey-dark;
+    border-bottom: 2px solid $grey;
+}
