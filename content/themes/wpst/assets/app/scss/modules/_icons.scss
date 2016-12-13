@@ -29,7 +29,7 @@
 .icon {
     @include icon-size($icon);
     display: inline-block;
-    background-size: contain;
+    background-size: cover;
 }
 
 
