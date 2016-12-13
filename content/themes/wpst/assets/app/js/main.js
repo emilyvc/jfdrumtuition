@@ -46,6 +46,8 @@
      * Toggle Gallery
      */
     toggleGallery.on('click', function(e) {
+        var skipToSlide = $(this).attr("id");
+
         //$('.modal').toggleClass('is-hidden');
         body.toggleClass('is-active-gallery');
 
@@ -70,13 +72,10 @@
             nextArrow: '<span class="icon icon--medium icon--next | gallery__nav-right"></span>',
             infinite: true,
             lazyLoad: 'progressive',
-            respondTo: 'slider'
+            // respondTo: 'slider'
         });
 
-        if($(this).attr("id")){
-            var skipToSlide = $(this).attr("id");
-            gallery.slick('slickGoTo', skipToSlide-1, 1);
-        }
+        gallery.slick('slickGoTo', skipToSlide, 1);
 
 
         e.preventDefault();

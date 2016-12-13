@@ -11,13 +11,6 @@
 
 $gallery = get_field('gallery_images');
 
-/**
- * Count the number of Gallery Items
- */
-if( isset($gallery) ):
-    $gallery_count = count($gallery);
-endif;
-
 if($gallery) :
 ?>
 
@@ -36,12 +29,11 @@ if($gallery) :
                         <?php $image = $i['gallery_image']['sizes']['gallery'] ? $i['gallery_image']['sizes']['gallery'] : $i['gallery_image']['url']; ?>
 
                         <li class="gallery__item" style="background-image:url('<?php echo $image; ?>');" data-caption="<?php echo $i['caption']; ?>"></li>
-                        <nav class="gallery__nav">
-                            <div class="gallery__caption"><?php echo $i['caption']; ?></div>
-                        </nav>
-                    <?php endforeach; ?>
-
+                        
+                    <?php endforeach; ?>                   
                 </ul>
+                <nav class="gallery__nav"></nav>
+                        <div class="gallery__caption"></div>
                 
             </div> <!-- /.container -->
         </div> <!-- /.gallery__inner -->
