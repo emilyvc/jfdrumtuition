@@ -22,7 +22,7 @@ function wpst_shortcode_panel( $atts, $content = null ) {
                 break;
         endswitch;
     endif;
-    $output_string = '<div class="u-push-top u-push-bottom | island ' . $css . '">' . $content . '</div>';
+    $output_string = '<div class="island ' . $css . '">' . $content . '</div>';
     return $output_string;
 }
 add_shortcode( 'panel', 'wpst_shortcode_panel' );

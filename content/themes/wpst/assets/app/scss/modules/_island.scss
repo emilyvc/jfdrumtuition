@@ -2,8 +2,9 @@
 \*----------------------------------------------------------------*/
 
 %island {
-    padding: $base*1.5;
-    margin-bottom: $base;
+    padding-left: $base*1.5;
+    margin-bottom: $base*2;
+    margin-top: $base*2;
     clear: both;
 
     > :last-child {
@@ -59,6 +60,6 @@
 
 
 .island--grey {
-    background-color: $grey-lighter;
+    border-left: 4px solid $color-text;
     color: $grey-dark;
 }
