@@ -46,7 +46,8 @@ address {
 
 a {
     text-decoration: none;
-    color: $color-link;
+    color: $color-brand;
+    border-bottom: 1px solid $color-brand;
 
     &:hover {
         color: darken($color-link, 10%);
