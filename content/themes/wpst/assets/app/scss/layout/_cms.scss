@@ -67,7 +67,13 @@
 [class*="wp-image"] {
 }
 
+.cms {
 
+    a {
+        color: $color-brand;
+        border-bottom: 1px solid $color-brand;
+    }
+}
 
 /* $. Other
 \*----------------------------------------------------------------*/

@@ -23,7 +23,7 @@ get_header();
             <?php while ( have_posts() ): ?>
                 <?php the_post(); ?>
 
-                <article>
+                <article class="cms">
                     <h1><?php the_title(); ?></h1>
 
                     <?php if ( $post->post_excerpt ): ?>
