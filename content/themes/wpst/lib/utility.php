@@ -19,6 +19,7 @@
  ******************************************************************************/
 
 require_once( 'utility/shortcodes/reset.php' );
+require_once( 'utility/shortcodes/panel.php' );
 
 
 
