@@ -100,3 +100,48 @@
         margin-left: 0;
     }
 }
+
+.slick-dots {
+    position: absolute;
+    bottom: -45px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+        padding-top: $base/2;
+        cursor: pointer;
+    }
+
+    li button {
+        font-size: 0;
+        line-height: 0;
+        display: block;
+        width: 10px;
+        height: 10px;
+        padding: 5px;
+        cursor: pointer;
+        color: lighten ($color-brand, 10%);
+        border: 0;
+        outline: none;
+        background: lighten ($color-brand, 10%);
+        border-radius: 50%;
+        content: '.';
+
+        &:hover {
+           color: $color-brand;
+           background: $color-brand;
+        }
+    }
+
+    li .slick-active {
+        background: lighten ($color-brand, 10%);
+    }
+}

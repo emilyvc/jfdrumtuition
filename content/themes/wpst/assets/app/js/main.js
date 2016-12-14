@@ -24,6 +24,7 @@
     var toggleGallery   = $('.js-toggle-gallery');
     var closeGallery    = $('.js-close-gallery');
     var gallery         = $('.js-gallery');
+    var albums         = $('.js-albums');
 
     /**
      * Setup 'CustomSelect' plugin on all Select elements
@@ -98,6 +99,17 @@
              e.preventDefault();
          });
     }
+
+    /**
+     * Create new gallery instance for Gallery
+     */
+    albums.slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows: false,
+      dots: true
+    });
 
 
 })(jQuery);

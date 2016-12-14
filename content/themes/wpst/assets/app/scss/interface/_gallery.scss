@@ -267,3 +267,22 @@
         padding: ($base/4) 0 0 ($base*2.75);
     }
 }
+
+
+.albums {
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: $base;
+
+    .slick-slide {
+        padding-right: $base;
+    }
+}
+
+.album-arrow-left {
+    float: left;
+}
+
+.album-arrow-right {
+    float: right;
+}
