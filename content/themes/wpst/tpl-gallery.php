@@ -21,7 +21,7 @@ get_header();
 ?>
 
 <main class="section">
-    <div class="container">
+    <div class="container container--small">
         <?php if ( have_posts() ): ?>
             <?php while ( have_posts() ): ?>
                 <?php the_post(); ?>
@@ -33,7 +33,7 @@ get_header();
                     <?php endif; ?>
 
                     <h2 class="u-push-bottom/2">Photos</h2>
-                    <div class="grid grid--spaced">
+                    <div class="grid grid--compact">
                         <div class="grid__item">
                             <?php get_template_part( 'views/page/gallery/list' ); ?>
                             <?php get_template_part( 'views/page/gallery/lightbox' ); ?>
@@ -41,7 +41,7 @@ get_header();
                     </div>
 
                      <h2 class="u-push-top@2 u-zero-bottom">Videos</h2>
-                    <div class="grid grid--spaced">
+                    <div class="grid grid--compact">
                         <div class="grid__item">
                             <?php get_template_part( 'views/page/gallery/videos' ); ?>
                         </div>

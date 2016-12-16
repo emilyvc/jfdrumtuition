@@ -1,5 +1,5 @@
 <footer>
-    <div class="container">
+    <div class="container <?php echo !is_front_page() ? 'container--small' : ''; ?>">
         <ul class="list--unset | footer__icons">
             <a href="https://www.instagram.com/jakefogarty/"><li class="icon icon--medium icon--instagram"></li></a>
             <a href="https://www.facebook.com/jake.fogarty2"><li class="icon icon--medium icon--facebook"></li></a>

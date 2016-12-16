@@ -98,7 +98,7 @@
     left: 0px;
     z-index: $z-index-5;
     position: fixed;
-    background: url(../img/modal-overlay.png) left top repeat;
+    background-color: $black;
 
     .is-active-gallery & {
         display: block;

@@ -52,6 +52,11 @@ footer {
     padding-left: $base;
     text-transform: uppercase;
     margin-top: $base/5;
+    display: none;
+
+    @include respond-min($bp2) {
+        display: block;
+    }
 }
 
 
