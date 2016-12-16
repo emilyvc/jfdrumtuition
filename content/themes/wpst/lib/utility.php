@@ -20,6 +20,7 @@
 
 require_once( 'utility/shortcodes/reset.php' );
 require_once( 'utility/shortcodes/panel.php' );
+require_once( 'utility/shortcodes/intro.php' );
 
 
 

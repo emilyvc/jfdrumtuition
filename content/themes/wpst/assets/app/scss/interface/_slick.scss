@@ -54,6 +54,7 @@
 .slick-slide {
     float: left;
     height: 100%;
+    padding: $base/2;
     min-height: 1px;
     [dir="rtl"] & {
         float: right;
@@ -102,11 +103,10 @@
 }
 
 .slick-dots {
-    position: absolute;
-    bottom: -45px;
     display: block;
     width: 100%;
     padding: 0;
+    margin-left: 0;
     list-style: none;
     text-align: center;
 
