@@ -98,6 +98,7 @@
      * Create new gallery instance for Gallery
      */
     albums.slick({
+      autoplay: true,
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 3,

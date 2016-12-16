@@ -34,9 +34,10 @@
 \*----------------------------------------------------------------*/
 
 .header--main {
-    padding: $base;
+    padding: $base*2.3;
     @include respond-min($bp3) {
         padding-top: $base;
+        padding-bottom: $base/2;
     }
 }
 
@@ -44,9 +45,20 @@
 \*----------------------------------------------------------------*/
 
 .header__logo {
+    position: fixed;
     margin: 0 auto;
+    transform: translateX(-50%);
     display: block;
     z-index: $z-index-4;
+     left: 50%;
+    top: 1.5%;
+
+    @include respond-min($bp3) {
+        position: relative;
+        top: auto;
+        transform: none;
+        left: auto;
+    }
 }
 
 
