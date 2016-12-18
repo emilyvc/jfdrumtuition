@@ -141,6 +141,7 @@ if ( get_option("large_crop") === false ) {
 
 //add_image_size('banner', 429, 280, true);
 add_image_size('gallery', 1370, 783, true);
+add_image_size('medium', 300, 300, true);
 
 
 /**
