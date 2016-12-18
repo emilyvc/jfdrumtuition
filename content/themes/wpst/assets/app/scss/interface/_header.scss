@@ -45,13 +45,14 @@
 \*----------------------------------------------------------------*/
 
 .header__logo {
-    position: fixed;
+    position: absolute;
     margin: 0 auto;
     transform: translateX(-50%);
     display: block;
     z-index: $z-index-4;
      left: 50%;
-    top: 1.5%;
+    top: 15%;
+
 
     @include respond-min($bp3) {
         position: relative;
@@ -61,6 +62,10 @@
     }
 }
 
+.is-active-nav .header__logo  {
+        position: fixed;
+        top: 1.5%;
+    }
 
 /* $. Nav
 \*----------------------------------------------------------------*/
