@@ -20,5 +20,3 @@
 
     </div>
 </header>
-
-<div class="main">

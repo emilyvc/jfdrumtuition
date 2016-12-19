@@ -17,20 +17,13 @@
 .video-container {
   position: relative;
   display: table;
-  height: 100%;
+  height: 30em;
   width: 100%;
   overflow: hidden;
-  height: 30em;
+
   @include respond-min($bp2) {
-    height: 45em;
+    height: 100vh;  
   }
-  @include respond-min($bp4) {
-    height: 39em;
-  }
-  @include respond-min($bp5) {
-    height: 45em;
-  }
-  
 }
 
 /* $. Modification
@@ -60,7 +53,7 @@
 .video--background {
   display: none;
   @include respond-min($bp4) {
-    background-image: url("/content/themes/wpst/assets/dist/img/jake-bg.jpg");
+    background-color: $black;
     position: absolute;
     display: block;
      right: 0;
@@ -69,6 +62,10 @@
      min-height: 100%;
      width: auto;
      z-index: -100;
+   }
+
+   @include respond-min($bp5) {
+      background-image: url("/content/themes/wpst/assets/dist/img/jake-bg.jpg");
    }
 }
 
@@ -88,9 +85,6 @@
     }
     @include respond-min($bp2) {
       margin-top: $base*10; 
-    }
-    @include respond-min($bp3) {
-      margin-top: $base*7; 
     }
 }
 

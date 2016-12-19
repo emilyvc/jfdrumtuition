@@ -21,10 +21,14 @@
 .header {
     @extend %cf;
     position: relative;
+    width: 100%;
     background-color: $black;
     padding: $base*2;
+    z-index: $z-index-3;
 
     @include respond-min($bp3) {
+        position: absolute;
+        width: 100%;
         padding-bottom: $base/2;
         padding-top: 0;
     }
@@ -35,6 +39,7 @@
 
 .header--main {
     padding: $base*2.3;
+    position: relative;
     @include respond-min($bp3) {
         padding-top: $base;
         padding-bottom: $base/2;
@@ -64,7 +69,7 @@
 
 .is-active-nav .header__logo  {
         position: fixed;
-        top: 1.5%;
+        top: 1.1%;
     }
 
 /* $. Nav
