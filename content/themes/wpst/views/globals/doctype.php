@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Titles/Descriptions -->
-    <title><?php wp_title( '', true, 'right' ); ?><?php echo ! is_front_page() ? '| ' . bloginfo( 'name' ) : ''; ?></title>
+    <title><?php wp_title( '', true, 'right' ); ?></title>
 
     <!-- Favicons -->
     <?php get_template_part( 'views/globals/favicons' ); ?>
