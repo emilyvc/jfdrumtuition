@@ -54,7 +54,9 @@ input[type="submit"],
  */
 
 .btn--primary {
-    @include btn($white, $grey);
+    @include btn($white, $color-brand);
+    margin-left: $base;
+    margin-bottom: $base;
 }
 
 .btn--secondary {}
